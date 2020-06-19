@@ -4,6 +4,7 @@
   "description": "backend to mychildhoodgames site",
   "main": "app.js",
   "scripts": {
+    "start": "server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Edward Agustin Lam-Mendoza",
