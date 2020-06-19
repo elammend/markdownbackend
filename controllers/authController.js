@@ -42,7 +42,7 @@ exports.signup = catchAsync(async (req, res, next) => {
     email: req.body.email,
     password: req.body.password,
     passwordConfirm: req.body.passwordConfirm
-  });
+  }); // prevent other info from being modified
 
   createSendToken(newUser, 201, res);
 });

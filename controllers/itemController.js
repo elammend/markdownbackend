@@ -13,8 +13,8 @@ const factory = require('./handlerFactory');
 exports.getAllItems = factory.getAll(Item);
 exports.getItem = factory.getOne(Item, { path: 'reviews' });
 exports.createItem = factory.createOne(Item);
-exports.updateItems = factory.updateOne(Item);
-exports.deleteTItems = factory.deleteOne(Item);
+exports.updateItem = factory.updateOne(Item);
+exports.deleteItem = factory.deleteOne(Item);
 
 // TODO make function to get item stats w/ aggregate functions
 

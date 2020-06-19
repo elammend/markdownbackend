@@ -9,8 +9,8 @@ const hpp = require('hpp');
 const AppError = require('./utils/appError');
 // const globalErrorHandler = require('./controllers/errorController'); TODO
 const itemRouter = require('./routes/itemRoutes');
-// const userRouter = require('./routes/userRoutes'); TODO
-// const reviewRouter = require('./routes/reviewRoutes'); TODO
+const userRouter = require('./routes/userRoutes');
+const reviewRouter = require('./routes/reviewRoutes');
 
 const app = express();
 
@@ -45,8 +45,8 @@ app.use(hpp()); // TODO look up whitelist function as is used in Natours app
 
 // 3) ROUTES
 app.use('/api/v1/items', itemRouter);
-// app.use('/api/v1/users', userRouter); TODO
-// app.use('/api/v1/reviews', reviewRouter); TODO
+app.use('/api/v1/users', userRouter);
+app.use('/api/v1/reviews', reviewRouter);
 
 app.all('*', (req, res, next) => {
   next(new AppError(`Can't find ${req.originalUrl} on this server!`, 404));

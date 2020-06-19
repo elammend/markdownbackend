@@ -14,20 +14,20 @@ router.route('/item-stats').get(itemController.getItemStats);
 router
   .route('/')
   .get(itemController.getAllItems)
-  .post(authController.protect, itemController.createTour);
+  .post(authController.protect, itemController.createItem);
 
 router
   .route('/:id')
   .get(itemController.getItem)
   .patch(
     authController.protect,
-    authController.restrictTo('admin', 'lead-guide'),
-    itemController.updateTour
+    authController.restrictTo('admin'),
+    itemController.updateItem
   )
   .delete(
     authController.protect,
     authController.restrictTo('admin'),
-    itemController.deleteTour
+    itemController.deleteItem
   );
 
 module.exports = router;
