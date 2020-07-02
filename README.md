@@ -1,3 +1,3 @@
 # itemReviewSite
 
-Sample website created with Node.js/Express backend
+Sample backend created with Node.js/Express 
