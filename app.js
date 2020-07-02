@@ -5,14 +5,36 @@ const helmet = require('helmet');
 const mongoSanitize = require('express-mongo-sanitize');
 const xss = require('xss-clean');
 const hpp = require('hpp');
-
+//const bodyParser = require('body-parser').json();
+const cors = require('cors');
 const AppError = require('./utils/appError');
 // const globalErrorHandler = require('./controllers/errorController'); TODO
-const itemRouter = require('./routes/itemRoutes');
 const userRouter = require('./routes/userRoutes');
-const reviewRouter = require('./routes/reviewRoutes');
+const docRouter = require('./routes/docRoutes');
+const compileRouter = require('./routes/compileRoutes');
+const emailRouter = require('./routes/emailRoutes');
+const { compile } = require('morgan');
 
 const app = express();
+
+//use cors to give people access
+
+app.use(
+  cors({ origin: 'http://localhost:3003', credentials: true })
+  //   {
+  //   origin: 'http://localhost:3002',
+  //   credentials: true
+  // }
+);
+
+// app.use(function(req, res, next) {
+//   res.header('Access-Control-Allow-Origin', 'http://localhost:3002');
+//   res.header(
+//     'Access-Control-Allow-Headers',
+//     'Origin, X-Requested-With, Content-Type, Accept'
+//   );
+//   next();
+// });
 
 // 1) GLOBAL MIDDLEWARES
 // Set security HTTP headers
@@ -32,8 +54,8 @@ const limiter = rateLimit({
 app.use('/api', limiter);
 
 // Body parser, reading data from body into req.body
-app.use(express.json({ limit: '10kb' }));
-
+app.use(express.json());
+//app.use(bodyParser);
 // Data sanitization against NoSQL query injection
 app.use(mongoSanitize());
 
@@ -41,13 +63,14 @@ app.use(mongoSanitize());
 app.use(xss());
 
 // Prevent parameter pollution
-app.use(hpp()); // TODO look up whitelist function as is used in Natours app
+app.use(hpp()); // TODO look up whitelist function
 
 // 3) ROUTES
-app.use('/api/v1/items', itemRouter);
-app.use('/api/v1/users', userRouter);
-app.use('/api/v1/reviews', reviewRouter);
 
+app.use('/api/v1/users', userRouter);
+app.use('/api/v1/compile', compileRouter);
+app.use('/api/v1/email', emailRouter);
+app.use('/api/v1/documents', docRouter);
 app.all('*', (req, res, next) => {
   next(new AppError(`Can't find ${req.originalUrl} on this server!`, 404));
 });

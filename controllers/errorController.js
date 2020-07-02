@@ -46,6 +46,7 @@ const sendErrorProd = (err, res) => {
     // Programming or other unknown error: don't leak error details
   } else {
     // 1) Log error
+    console.trace('HERE I AM');
     console.error('ERROR 💥', err);
 
     // 2) Send generic message
