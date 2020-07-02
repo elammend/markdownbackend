@@ -1,10 +1,6 @@
 const jwt = require('jsonwebtoken');
 const { promisify } = require('util');
-const lodash = require('lodash');
 const fs = require('fs');
-const AWS = require('aws-sdk');
-const { join } = require('path');
-const sys = require('sys');
 const pdf = require('html-pdf');
 const User = require('./../models/userModel');
 const catchAsync = require('./../utils/catchAsync');
@@ -52,7 +48,7 @@ exports.compile = catchAsync(async (req, res, next) => {
   const html = fs.readFileSync(`${decoded.id}.html`, 'utf8');
   const options = { format: 'Letter' };
 
-  pdf.create(html, options).toFile(`${decoded.id}.pdf`, function(err, res) {
+  pdf.create(html, options).toFile(`${decoded.id}.pdf`, function(err, resp) {
     if (err) {
       console.log(err);
       res.status(201).json({
