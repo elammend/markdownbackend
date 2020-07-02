@@ -21,7 +21,7 @@ const app = express();
 
 app.use(
   cors({
-    origin: 'https://edward-latex-react-frontend.herokuapp.com/',
+    origin: 'https://edward-latex-react-frontend.herokuapp.com',
     credentials: true
   })
 );
