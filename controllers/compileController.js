@@ -38,6 +38,7 @@ exports.compile = catchAsync(async (req, res, next) => {
       )
     );
   }
+
   fs.writeFileSync(`${decoded.id}.html`, htmlText, err => {
     // throws an error, you could also catch it here
     if (err) throw err;
@@ -51,7 +52,7 @@ exports.compile = catchAsync(async (req, res, next) => {
   pdf.create(html, options).toFile(`${decoded.id}.pdf`, function(err, resp) {
     if (err) {
       console.log(err);
-      res.status(201).json({
+      resp.status(201).json({
         status: 'success',
         data: {
           message: objectURL,
