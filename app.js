@@ -19,25 +19,8 @@ const app = express();
 
 //use cors to give people access
 
-app.use(
-  cors({ origin: 'http://localhost:3003', credentials: true })
-  //   {
-  //   origin: 'http://localhost:3002',
-  //   credentials: true
-  // }
-);
+app.use(cors({ origin: 'http://localhost:3003', credentials: true }));
 
-// app.use(function(req, res, next) {
-//   res.header('Access-Control-Allow-Origin', 'http://localhost:3002');
-//   res.header(
-//     'Access-Control-Allow-Headers',
-//     'Origin, X-Requested-With, Content-Type, Accept'
-//   );
-//   next();
-// });
-
-// 1) GLOBAL MIDDLEWARES
-// Set security HTTP headers
 app.use(helmet());
 
 // Development logging
