@@ -2,3 +2,7 @@ node_modules
 config.env
 .prettierrc
 .eslintrc.json
+*.out
+*.log
+*.pdf
+*.tex

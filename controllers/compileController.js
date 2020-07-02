@@ -116,7 +116,7 @@ exports.compile = catchAsync(async (req, res, next) => {
     console.log('PDF generated!');
     uploadFile(decoded.id + '.pdf');
     objectURL =
-      'http://localhost:3000/api/v1/documents?id=' +
+      'https://edward-express-latex-backend.herokuapp.com/api/v1/documents?id=' +
       decoded.id +
       '&time=' +
       Date.now();
