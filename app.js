@@ -19,7 +19,12 @@ const app = express();
 
 //use cors to give people access
 
-app.use(cors({ origin: 'http://localhost:3003', credentials: true }));
+app.use(
+  cors({
+    origin: 'https://edward-latex-react-frontend.herokuapp.com/',
+    credentials: true
+  })
+);
 
 app.use(helmet());
 
