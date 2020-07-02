@@ -1,7 +1,6 @@
 const jwt = require('jsonwebtoken');
 const { promisify } = require('util');
 const lodash = require('lodash');
-const latex = require('node-latex');
 const fs = require('fs');
 const AWS = require('aws-sdk');
 const { join } = require('path');
