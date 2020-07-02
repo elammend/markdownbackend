@@ -74,7 +74,7 @@ exports.compile = catchAsync(async (req, res, next) => {
     status: 'success',
     data: {
       message:
-        'http://localhost:3000/api/v1/documents?id=' +
+        'https://markdown-backend.herokuapp.com/api/v1/documents?id=' +
         decoded.id +
         '&date=' +
         Date.now()
