@@ -16,7 +16,6 @@ const emailRouter = require('./routes/emailRoutes');
 const { compile } = require('morgan');
 
 const app = express();
-
 //use cors to give people access
 
 app.use(
