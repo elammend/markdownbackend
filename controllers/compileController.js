@@ -49,7 +49,7 @@ exports.compile = catchAsync(async (req, res, next) => {
     console.log('html text saved!');
     // success case, the file was saved
   });
-
+  console.log('hot hot hot');
   const html = fs.readFileSync(`${decoded.id}.html`, 'utf8');
   const options = { format: 'Letter' };
 
