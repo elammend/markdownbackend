@@ -2,6 +2,7 @@ const jwt = require('jsonwebtoken');
 const { promisify } = require('util');
 const fs = require('fs');
 const pdf = require('html-pdf');
+const markdownpdf = require('markdown-pdf');
 const User = require('./../models/userModel');
 const catchAsync = require('./../utils/catchAsync');
 const AppError = require('../utils/appError');
@@ -13,6 +14,7 @@ exports.compile = catchAsync(async (req, res, next) => {
 
   console.log('started compiling!');
   const htmlText = req.body.text;
+  console.log(req.body);
 
   const bearerText = req.headers.authorization;
   const token = bearerText.split(' ')[1];
@@ -50,27 +52,32 @@ exports.compile = catchAsync(async (req, res, next) => {
     // success case, the file was saved
   });
   console.log('hot hot hot');
-  const html = fs.readFileSync(`${decoded.id}.html`, 'utf8');
-  const options = { format: 'Letter' };
 
-  pdf.create(html, options).toFile(`${decoded.id}.pdf`, function(err, resp) {
-    if (err) {
-      console.log(err);
-      resp.status(201).json({
-        status: 'success',
-        data: {
-          message: objectURL,
-          errorMessage: this.resError
-        }
+  try {
+    markdownpdf()
+      .from(`${decoded.id}.html`)
+      .to(`${decoded.id}.pdf`, function() {
+        console.log('Done with markdown');
       });
-    }
-    console.log(res); // { filename: '/app/businesscard.pdf' }
-  });
+  } catch (err) {
+    console.error(err);
+    res.status(201).json({
+      status: 'success',
+      data: {
+        message: objectURL,
+        errorMessage: this.resError
+      }
+    });
+  }
 
   res.status(201).json({
     status: 'success',
     data: {
-      message: objectURL
+      message:
+        'http://localhost:3000/api/v1/documents?id=' +
+        decoded.id +
+        '&date=' +
+        Date.now()
     }
   });
 });
