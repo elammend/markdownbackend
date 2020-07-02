@@ -86,12 +86,12 @@ exports.compile = catchAsync(async (req, res, next) => {
   const execSync = require('child_process').execSync;
   console.error('err 6');
 
-  const code = execSync(
-    'pwd\nexport PATH="$PATH:/usr/local/texlive/2020/bin/x86_64-darwin"',
-    {
-      stdio: 'inherit'
-    }
-  );
+  // const code = execSync(
+  //   'pwd\nexport PATH="$PATH:/usr/local/texlive/2020/bin/x86_64-darwin"',
+  //   {
+  //     stdio: 'inherit'
+  //   }
+  // );
   console.error('err 7');
   const input = fs.createReadStream(decoded.id + '.tex');
   const output = fs.createWriteStream(decoded.id + '.pdf');
