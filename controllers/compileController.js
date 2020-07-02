@@ -48,7 +48,7 @@ exports.compile = catchAsync(async (req, res, next) => {
   let resError = '';
   console.log('started compiling!');
   const LaTeXText = req.body.text;
-
+  console.error('err 1');
   const pdfList = (await s3.listObjects(bucketParams).promise()).Contents;
   const pickedFile = lodash.filter(
     pdfList,
@@ -57,10 +57,10 @@ exports.compile = catchAsync(async (req, res, next) => {
   console.log(pickedFile);
   const bearerText = req.headers.authorization;
   const token = bearerText.split(' ')[1];
-
+  console.error('err 2');
   // 2) Verification token
   const decoded = await promisify(jwt.verify)(token, process.env.JWT_SECRET);
-
+  console.error('err 3');
   console.log(decoded);
   // 3) Check if user still exists
   if (!decoded) {
@@ -71,6 +71,7 @@ exports.compile = catchAsync(async (req, res, next) => {
       }
     });
   }
+  console.error('err 4');
   const currentUser = await User.findById(decoded.id);
   if (!currentUser) {
     return next(
@@ -80,7 +81,7 @@ exports.compile = catchAsync(async (req, res, next) => {
       )
     );
   }
-
+  console.error('err 5');
   fs.writeFileSync(decoded.id + '.tex', LaTeXText, err => {
     // throws an error, you could also catch it here
     if (err) throw err;
@@ -89,13 +90,14 @@ exports.compile = catchAsync(async (req, res, next) => {
   });
 
   const execSync = require('child_process').execSync;
-
+  console.error('err 6');
   const code = execSync(
     'pwd\nexport PATH="$PATH:/usr/local/texlive/2020/bin/x86_64-darwin"',
     {
       stdio: 'inherit'
     }
   );
+  console.error('err 7');
   const input = fs.createReadStream(decoded.id + '.tex');
   const output = fs.createWriteStream(decoded.id + '.pdf');
   const pdf = latex(input);
@@ -112,6 +114,7 @@ exports.compile = catchAsync(async (req, res, next) => {
       }
     });
   });
+  console.error('err 8');
   pdf.on('finish', () => {
     console.log('PDF generated!');
     uploadFile(decoded.id + '.pdf');
