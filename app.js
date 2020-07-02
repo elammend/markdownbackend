@@ -20,7 +20,7 @@ const app = express();
 //'https://edward-latex-react-frontend.herokuapp.com'
 app.use(
   cors({
-    origin: 'http://localhost:3003',
+    origin: 'https://edward-latex-react-frontend.herokuapp.com',
     credentials: true
   })
 );
