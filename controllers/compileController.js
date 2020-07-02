@@ -67,19 +67,10 @@ exports.compile = catchAsync(async (req, res, next) => {
     console.log(res); // { filename: '/app/businesscard.pdf' }
   });
 
-  pdf.on('finish', () => {
-    console.log('PDF generated!');
-    // uploadFile(decoded.id + '.pdf');
-    objectURL =
-      'https://edward-express-latex-backend.herokuapp.com/api/v1/documents?id=' +
-      decoded.id +
-      '&time=' +
-      Date.now();
-    res.status(201).json({
-      status: 'success',
-      data: {
-        message: objectURL
-      }
-    });
+  res.status(201).json({
+    status: 'success',
+    data: {
+      message: objectURL
+    }
   });
 });
