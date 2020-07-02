@@ -1,7 +1,6 @@
 const jwt = require('jsonwebtoken');
 const { promisify } = require('util');
 const fs = require('fs');
-const pdf = require('html-pdf');
 const markdownpdf = require('markdown-pdf');
 const User = require('./../models/userModel');
 const catchAsync = require('./../utils/catchAsync');
@@ -13,7 +12,7 @@ exports.compile = catchAsync(async (req, res, next) => {
     'https://elasticbeanstalk-us-east-2-757174149823.s3.us-east-2.amazonaws.com/sampleReactPdf.pdf';
 
   console.log('started compiling!');
-  const htmlText = req.body.text;
+  const markdownText = req.body.text;
   console.log(req.body);
 
   const bearerText = req.headers.authorization;
@@ -41,21 +40,21 @@ exports.compile = catchAsync(async (req, res, next) => {
     );
   }
 
-  fs.writeFileSync(`${decoded.id}.html`, htmlText, err => {
+  fs.writeFileSync(`${decoded.id}.txt`, markdownText, err => {
     // throws an error, you could also catch it here
     if (err) {
       console.error('ERROR');
       console.error(err);
       throw err;
     }
-    console.log('html text saved!');
+    console.log('markdown text saved!');
     // success case, the file was saved
   });
   console.log('hot hot hot');
 
   try {
     markdownpdf()
-      .from(`${decoded.id}.html`)
+      .from(`${decoded.id}.txt`)
       .to(`${decoded.id}.pdf`, function() {
         console.log('Done with markdown');
       });

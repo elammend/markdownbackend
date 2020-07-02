@@ -1,9 +1,5 @@
-const jwt = require('jsonwebtoken');
-const { promisify } = require('util');
 const fs = require('fs');
-const User = require('../models/userModel');
 const catchAsync = require('../utils/catchAsync');
-const AppError = require('../utils/appError');
 
 // Call S3 to obtain a list of the objects in the bucket
 exports.getLastDoc = catchAsync(async (req, res, next) => {
