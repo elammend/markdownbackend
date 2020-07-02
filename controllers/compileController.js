@@ -41,7 +41,11 @@ exports.compile = catchAsync(async (req, res, next) => {
 
   fs.writeFileSync(`${decoded.id}.html`, htmlText, err => {
     // throws an error, you could also catch it here
-    if (err) throw err;
+    if (err) {
+      console.error('ERROR');
+      console.error(err);
+      throw err;
+    }
     console.log('html text saved!');
     // success case, the file was saved
   });
