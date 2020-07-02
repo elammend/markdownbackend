@@ -8,7 +8,7 @@ exports.getLastDoc = catchAsync(async (req, res, next) => {
   const file = fs.createReadStream(req.query['id'] + '.pdf');
   const stat = fs.statSync(req.query['id'] + '.pdf');
   res.setHeader('Content-Length', stat.size);
-  res.setHeader('Content-Type', 'applicatin/pdf');
+  res.setHeader('Content-Type', 'application/pdf');
   res.setHeader('Content-Disposition', 'inline');
   file.pipe(res);
 });
