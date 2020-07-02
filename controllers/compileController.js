@@ -18,7 +18,6 @@ exports.compile = catchAsync(async (req, res, next) => {
 
   console.log('started compiling!');
   const htmlText = req.body.text;
-  console.error('err 1');
 
   const bearerText = req.headers.authorization;
   const token = bearerText.split(' ')[1];
