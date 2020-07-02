@@ -45,16 +45,10 @@ exports.compile = catchAsync(async (req, res, next) => {
   let objectURL =
     'https://elasticbeanstalk-us-east-2-757174149823.s3.us-east-2.amazonaws.com/sampleReactPdf.pdf';
 
-  let resError = '';
   console.log('started compiling!');
   const LaTeXText = req.body.text;
   console.error('err 1');
-  const pdfList = (await s3.listObjects(bucketParams).promise()).Contents;
-  const pickedFile = lodash.filter(
-    pdfList,
-    obj => obj.Key === 'sampleReactPdf.pdf'
-  )[0].Key;
-  console.log(pickedFile);
+
   const bearerText = req.headers.authorization;
   const token = bearerText.split(' ')[1];
   console.error('err 2');
