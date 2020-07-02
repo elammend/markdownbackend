@@ -51,7 +51,7 @@ exports.compile = catchAsync(async (req, res, next) => {
 
   const bearerText = req.headers.authorization;
   const token = bearerText.split(' ')[1];
-  console.error('err 2');
+  console.error(token);
   // 2) Verification token
   const decoded = await promisify(jwt.verify)(token, process.env.JWT_SECRET);
   console.error('err 3');
