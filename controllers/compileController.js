@@ -92,7 +92,6 @@ exports.compile = catchAsync(async (req, res, next) => {
   //     stdio: 'inherit'
   //   }
   // );
-
   console.error('err 7');
   const input = fs.createReadStream(decoded.id + '.tex');
   const output = fs.createWriteStream(decoded.id + '.pdf');
