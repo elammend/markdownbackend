@@ -18,13 +18,13 @@ const { compile } = require('morgan');
 const app = express();
 //use cors to give people access
 //'https://edward-latex-react-frontend.herokuapp.com'
-app.use(
-  cors()
-  //   {
-  //   origin: 'https://markdown-frontend.herokuapp2.com',
-  //   credentials: true
-  // }
-);
+// app.use(
+//   cors()
+//   //   {
+//   //   origin: 'https://markdown-frontend.herokuapp2.com',
+//   //   credentials: true
+//   // }
+// );
 
 app.use(helmet());
 
