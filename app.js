@@ -13,7 +13,7 @@ const userRouter = require('./routes/userRoutes');
 const docRouter = require('./routes/docRoutes');
 const compileRouter = require('./routes/compileRoutes');
 const emailRouter = require('./routes/emailRoutes');
-const { compile } = require('morgan');
+//const { compile } = require('morgan');
 
 const app = express();
 //use cors to give people access
