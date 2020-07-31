@@ -24,7 +24,7 @@ app.use(
     credentials: true
   })
 );
-
+app.use(cors());
 app.use(helmet());
 
 // Development logging
