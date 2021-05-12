@@ -28,7 +28,7 @@
     "markdown-pdf": "^10.0.0",
     "mongoose": "^5.9.27",
     "morgan": "^1.10.0",
-    "nodemailer": "^6.4.10",
+    "nodemailer": "^6.4.16",
     "nodemon": "^2.0.4",
     "slugify": "^1.4.4",
     "validator": "^13.1.1",
